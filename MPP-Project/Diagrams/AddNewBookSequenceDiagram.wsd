@@ -1,0 +1,40 @@
+@startuml "AddNewBookSequenceDiagram"
+
+title Add New Book
+
+actor Administrator
+
+participant UI
+participant SystemController
+participant Book
+participant Author
+participant DataAccess
+
+Administrator -> UI : 1: select "add book"
+activate UI
+
+' UI -> SystemController : displayAddBookScreen()
+    UI -> Author : 2: * Author(firstname, lastname, tel,address,bio)
+    activate Author
+    Deactivate Author
+
+    UI -> Book : 2: book(ISBN, title, authors, maxCheckoutLength, numOfCopies) 
+    activate Book
+    Deactivate Book
+
+    
+    UI -> SystemController : 3: addNewBook(book)
+    activate SystemController
+        SystemController -> DataAccess: 4: saveNewBook(member)
+        activate DataAccess
+        deactivate DataAccess
+        ' SystemController -> DataStore : persistBookDetails(ISBN, title, authors, maxCheckoutLength, numOfCopies)
+        ' activate DataStore
+        '     DataStore --> SystemController : confirmation
+        ' deactivate DataStore
+
+        ' SystemController --> UI : displayConfirmation()
+    deactivate SystemController
+deactivate UI
+
+@enduml

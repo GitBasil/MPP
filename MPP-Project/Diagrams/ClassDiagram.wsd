@@ -1,0 +1,97 @@
+@startuml "ClassDiagram"
+
+title Class Diagram
+
+left to right direction
+
+class Address {
+  -street
+  -city
+  -state
+  -zip
+  +getStreet()
+	+getCity()
+	+getState()
+	+getZip()
+}
+
+class Person {
+  -firstName
+  -lastName
+  -phone
+  +getFirstName()
+	+getLastName()
+	+getTelephone()
+	+getAddress()
+	+setFirstName(firstName)
+	+setLastName(lastName)
+	+setTelephone(telephone)
+	+setAddress(address)
+}
+
+class Author {
+  -firstName
+  -lastName
+  -credentials
+  -phone
+}
+
+class LibraryMember {
+  -memberId
+  -firstName
+  -lastName
+  -phone
+  +getMemberId()
+  +getCheckoutRecord()
+  +checkOut()
+}
+
+class CheckoutRecord {
+  +addEntry()
+  +getEntries()
+}
+
+class CheckoutRecordEntry {
+  -checkoutDate
+  -dueDate
+  +getCheckoutDate()
+  +getDueDate()
+  +getBookCopy()
+  +isOverdue()
+}
+
+class BookCopy {
+  -copyNum
+  +isAvailable()
+	+getCopyNum()
+	+getBook()
+	+changeAvailability()
+}
+
+class Book {
+  -ISBN
+  -title
+  + getCopyNums()
+  + addCopy()
+  + equals()
+  + isAvailable()
+  + toString()
+  + getNumCopies()
+  + getTitle()
+  + getCopies()
+  + getAuthors()
+  + getIsbn() 
+  + getNextAvailableCopy()
+  + getCopy()
+  + getMaxCheckoutLength()
+}
+
+Person "1" -- "0..1" Address : has
+Person <|-- Author
+Person <|-- LibraryMember
+LibraryMember "1" -- "1" CheckoutRecord : has
+CheckoutRecord "1" -- "0..*" CheckoutRecordEntry : contains
+CheckoutRecordEntry "1" -- "1" BookCopy : contains
+BookCopy "1..*" -- "1" Book
+Author "1..*" -- "1..*" Book : author of
+@enduml

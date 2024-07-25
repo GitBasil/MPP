@@ -1,0 +1,20 @@
+@startuml
+class "List<?>" as ListWildcard
+class "List<? extends Number>" as ListExtendsNumber
+class "List<? extends Integer>" as ListExtendsInteger
+class "List<? super Integer>" as ListSuperInteger
+class "List<? super Number>" as ListSuperNumber
+class "List<Integer>" as ListInteger
+class "List<Number>" as ListNumber
+
+ListWildcard <|-- ListExtendsNumber
+ListWildcard <|-- ListSuperInteger
+ListExtendsNumber <|-- ListExtendsInteger
+ListExtendsInteger <|-- ListInteger
+ListSuperInteger <|-- ListSuperNumber
+ListSuperNumber <|-- ListNumber
+
+ListExtendsNumber <|-- ListNumber
+ListSuperInteger <|-- ListInteger
+
+@enduml

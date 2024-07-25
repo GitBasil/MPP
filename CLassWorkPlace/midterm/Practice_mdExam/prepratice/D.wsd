@@ -1,0 +1,29 @@
+@startuml
+
+actor User
+participant Order
+participant LineItem
+participant Product
+participant Customer
+
+User -> Order: calculatePrice()
+activate Order
+Order -> LineItem: * getLineItems(order): lineItems
+    activate LineItem
+    deactivate LineItem
+
+    Order -> Product: * getPricingRules(lineItem)
+    activate Product
+    deactivate Product
+
+    Order -> Customer: getDiscount()
+    activate Customer
+    deactivate Customer
+
+    Order -> Order: computePrice()
+    activate Order
+    deactivate Order
+
+deactivate Order
+
+@enduml

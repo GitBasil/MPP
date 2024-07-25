@@ -1,0 +1,6 @@
+1. 
+    a. List<Number> nums = ints;
+    b. nums.add(3.14);
+4.
+    a. nums.add(3.14); // add is not permitted with extend wildcard
+    b. double dbl = sum(ints); // mixing extends with super

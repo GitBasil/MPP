@@ -1,0 +1,22 @@
+@startuml
+
+title Calculate Price Process
+
+participant anOrder
+participant anOrderLine
+participant aProduct
+participant aCustomer
+
+anOrder -> anOrder: calculatePrice
+anOrder -> anOrderLine: getQuantity
+anOrderLine -> anOrder: quantity
+anOrder -> anOrderLine: getProduct
+anOrderLine -> anOrder: aProduct
+anOrder -> aProduct: getPricingDetails
+aProduct -> anOrder: pricingDetails
+anOrder -> anOrder: calculateBasePrice
+anOrder -> anOrder: calculateDiscounts
+anOrder -> aCustomer: getDiscountInfo
+aCustomer -> anOrder: discountInfo
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml "AddNewMemberSequenceDiagram"
+
+title Add New Member
+
+actor Librarian
+
+participant UI
+participant SystemController
+participant CheckoutRecord
+participant Address
+participant LibraryMember
+participant DataAccess
+
+Librarian -> UI : 1: new member
+activate UI
+    ' UI -> UI : 2: handle
+    ' UI -> SystemController : 3: addMember
+    ' activate UI
+
+    UI -> Address : 2: new(st, city, state, zip)
+    activate Address
+    deactivate Address
+
+    UI -> SystemController : 3: allMemberIds()
+    activate SystemController
+    deactivate SystemController
+   
+    '     SystemController -> UI : 5: getAddressData
+    '     activate UI
+    '     deactivate UI
+    ' deactivate SystemController
+
+    UI -> CheckoutRecord : 4: CheckoutRecord()
+    activate CheckoutRecord
+    deactivate CheckoutRecord
+
+    UI -> LibraryMember : 5: new(id, fname, lname, tel, address,CheckoutRecord)
+    activate LibraryMember
+    deactivate LibraryMember
+
+    UI -> SystemController : 6: addNewMember(member)
+        activate SystemController
+            SystemController -> DataAccess: 6: saveNewMember(member)
+            activate DataAccess
+            deactivate DataAccess
+        deactivate SystemController
+
+    ' UI -> DataAccess : 7: saveLibraryMember(name, member)
+    '     activate DataAccess
+    '     deactivate DataAccess
+deactivate UI
+
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+
+actor User
+participant CheckinForm
+participant CheckinController
+participant LibraryMember
+participant CheckoutRecord
+participant LibraryDBSubSys
+
+User -> CheckinForm: 1. checkinBook
+activate CheckinForm
+    CheckinForm -> CheckinController: 2. checkbook(book, member)
+    activate CheckinController
+
+        CheckinController -> LibraryMember: 3. getCheckOutRec(book): storedRecord
+        activate LibraryMember
+        deactivate LibraryMember
+
+        CheckinController -> CheckoutRecord: 4. getDueDate(book): dueDate
+        activate CheckoutRecord
+        deactivate CheckoutRecord
+
+        CheckinController -> CheckinController: 5. computeFine(dueDate): fine
+        activate CheckinController
+        deactivate CheckinController
+
+        CheckinController -> LibraryMember: 6. removeRecord(book)
+        activate LibraryMember
+        deactivate LibraryMember
+
+        CheckinController -> LibraryMember: 7. getID(): id
+        activate LibraryMember
+        deactivate LibraryMember
+
+
+        CheckinController -> LibraryDBSubSys: 8. removeRecord(id, storedRecord)
+        activate LibraryDBSubSys
+        deactivate LibraryDBSubSys
+
+        CheckinForm -> CheckinForm: 9. displayCheckoutInfo()
+        activate CheckinForm
+        deactivate CheckinForm
+
+        CheckinForm -> CheckinForm: 10. clearCheckoutFields()
+        activate CheckinForm
+        deactivate CheckinForm
+
+    deactivate CheckinController
+deactivate CheckinForm
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml Book Check-in Process
+
+title Book Check-in Process
+
+participant User
+participant CheckinForm
+participant CheckinController
+participant LibraryMember
+participant LibraryDBSubsystem
+
+activate User
+    User -> CheckinForm: checkinBook()
+    activate CheckinForm
+        CheckinForm -> CheckinController: checkBook(m_book, m_member)
+        activate CheckinController
+            CheckinController -> LibraryMember: getCheckoutRec(m_book)
+            activate LibraryMember
+            deactivate LibraryMember
+            CheckinController -> storedRecord: getDueDate()
+            activate storedRecord
+            deactivate storedRecord
+            CheckinController -> LibraryMember: removeRecord(m_book)
+            activate LibraryMember
+            deactivate LibraryMember
+            CheckinController -> LibraryDBSubsystem: removeRecord(m_member.getID(), storedRecord)
+            activate LibraryDBSubsystem
+            deactivate LibraryDBSubsystem
+        deactivate CheckinController
+        CheckinForm -> User: displayCheckoutInfo()
+        CheckinForm -> User: clearCheckoutFields()
+    deactivate CheckinForm
+deactivate User
+
+@enduml

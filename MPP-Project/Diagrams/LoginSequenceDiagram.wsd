@@ -1,0 +1,32 @@
+@startuml "LoginSequenceDiagram"
+
+title Login
+
+actor User
+
+participant LoginScreen as UI
+participant AuthController
+participant DataStore
+
+User -> UI : 1. Enter ID and Password
+activate UI
+
+    UI -> AuthController : 2. submit(ID, Password)
+    activate AuthController
+
+        AuthController -> DataStore : 3. lookup(ID)
+        activate AuthController
+        activate DataStore
+            DataStore --> AuthController : 4. return(UserData)
+        deactivate DataStore
+        deactivate AuthController
+
+        AuthController -> AuthController : 5. verifyPassword(UserData, Password)
+        activate AuthController
+        deactivate AuthController
+        AuthController --> UI : 6. return(AuthorizationLevel)
+    deactivate AuthController
+
+deactivate UI
+
+@enduml

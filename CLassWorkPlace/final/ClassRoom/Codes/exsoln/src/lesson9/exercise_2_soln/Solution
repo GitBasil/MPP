@@ -1,0 +1,8 @@
+The code is creating a list of int arrays having
+lengths determined successively by the elements
+of ints. Note that by default, the values in these
+int arrays are always 0. It then converts this list of int[]s
+into a list of strings by applying toString
+to each array. The output is the following:
+
+[[0, 0, 0], [0, 0, 0, 0, 0], [0, 0], [0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]

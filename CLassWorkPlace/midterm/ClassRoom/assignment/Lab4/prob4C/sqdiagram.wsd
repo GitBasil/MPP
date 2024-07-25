@@ -1,0 +1,38 @@
+@startuml
+
+actor User
+
+participant Main
+participant Commissioned
+participant Paycheck
+
+User -> Main: main(String[] args)
+activate Main
+
+Main -> Commissioned: new Commissioned("100", .1, 1000)
+activate Commissioned
+
+Main -> Commissioned: addNewOrder(1, LocalDate.of(2021, 9, 1), 100)
+Commissioned -> Commissioned: addNewOrder(Order)
+deactivate Commissioned
+
+Main -> Commissioned: calcCompensation(10, 2021)
+activate Commissioned
+
+Commissioned -> Paycheck: new Paycheck()
+activate Paycheck
+Commissioned -> Paycheck: setGrossPay(double)
+Commissioned -> Paycheck: setFica(double)
+Commissioned -> Paycheck: setState(double)
+Commissioned -> Paycheck: setLocal(double)
+Commissioned -> Paycheck: setMedicare(double)
+Commissioned -> Paycheck: setSocialSecurity(double)
+deactivate Paycheck
+
+Commissioned -> Main: return Paycheck
+deactivate Commissioned
+
+Main -> Main: System.out.println(Paycheck)
+deactivate Main
+
+@enduml

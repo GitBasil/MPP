@@ -1,0 +1,60 @@
+Part 1
+    a.
+        i. 
+            parameters: there is no parameters
+            free variables:s and t
+
+        ii. 
+            parameters: s and t
+            free variables: ignoreCase
+
+    b. 
+        1. Lambda Expression: () -> Math.random()
+        2. RandomNumberPrinter.java
+        3. clsRandomNumberPrinter.java
+Part 2
+    a. comparator2
+    b. comparator3
+    c. lmbdcomparator3
+
+Part 3
+    LambdaBiFunction.java
+
+Part 4
+    CountWordsCls.java
+
+Part 5
+
+Example: (String x) -> x.toUpperCase()
+Function<String, String> toUpper1 = (String x) -> x.toUpperCase();
+Function<String, String> toUpper2 = String::toUpperCase; Method reference type: Class::instanceMethod
+
+A. (Employee e) -> e.getName()
+    Function<String, String> getName = (Employee e) -> e.getName();
+    Function<String, String> getName = Employee::getName; Method reference type: Class::instanceMethod
+
+B. (Employee e,String s) -> e.setName(s)
+    BiFunction<Employee, String> setName = (Employee e, String s) -> e.setName(s);
+    BiFunction<Employee, String> setName = Employee::setName; Method reference type: Class::instanceMethod
+
+C. (String s1,String s2) -> s1.compareTo(s2)
+    BiFunction<String, String, Integer> compareTo = (String s1, String s2) -> s1.compareTo(s2);
+    BiFunction<String, String, Integer> compareTo = String::compareTo; Method reference type: Class::instanceMethod
+
+D. (Integer x,Integer y) -> Math.pow(x,y)
+    BiFunction<Integer, Integer, Double> pow1 = (Integer x, Integer y) -> Math.pow(x, y);
+    BiFunction<Integer, Integer, Double> pow2 = Math::pow; // Method reference type: Class::staticMethod
+
+E. (Apple a) -> a.getWeight()
+    Function<Apple, Double> getWeight = (Apple a) -> a.getWeight();
+    Function<Apple, Double> getWeight = Apple::getWeight; Method reference type: Class::instanceMethod
+
+F. (String x) -> Integer.parseInt(x);
+    Function<String, Integer> parseInt1 = (String x) -> Integer.parseInt(x);
+    Function<String, Integer> parseInt2 = Integer::parseInt; Method reference type: Class::staticMethod
+
+G. EmployeeNameComparator comp = new EmployeeNameComparator(); (Employee e1, Employee e2) -> comp.compare(e1,e2)
+
+    EmployeeNameComparator comp = new EmployeeNameComparator();
+    BiFunction<Employee, Employee, Integer> compare = (Employee e1, Employee e2) -> comp.compare(e1, e2);
+    BiFunction<Employee, Employee, Integer> compare = comp::compare; Method reference type: instance::instanceMethod

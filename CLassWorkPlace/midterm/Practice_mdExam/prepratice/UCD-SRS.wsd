@@ -1,0 +1,19 @@
+@startuml
+
+actor Student
+actor Professor
+
+rectangle SRS {
+  usecase "Register for a course" as UC1
+  usecase "Drop course" as UC2
+  usecase "View Schedule" as UC3
+  usecase "Post grades" as UC4
+}
+
+Student -> UC1
+Student -> UC2
+Student -> UC3
+Professor -> UC3
+Professor -> UC4
+
+@enduml

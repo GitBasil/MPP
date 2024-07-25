@@ -1,0 +1,25 @@
+@startuml
+
+class Property {
+    +address: String
+    +rent: Number
+}
+
+class House {
+    +lotSize: Number
+}
+
+class Condominium {
+    +numberOfFloors: Number
+}
+
+class Trailer {
+    +trailerParkAddress: String
+}
+
+class Admin {
+    +properties: List<Property>
+}
+
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+participant Customer
+participant Account
+
+[o-> Customer: 1. startupMessage()
+activate Customer
+    Customer -> Account: 2. doSomthing()
+    activate Account #DarkGray
+        Account -> Account: 3. doSomethingElse()
+        activate Account #Gray
+        deactivate Account
+    deactivate Account
+deactivate Customer
+@enduml

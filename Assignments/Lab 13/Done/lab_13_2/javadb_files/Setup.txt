@@ -1,0 +1,36 @@
+Getting Started with JavaDB (which is a variant of Apache Derby)
+
+1. Installation: Create a directory C:\javadb_files. This is where database files will be stored --
+your own files as well as outputs from the dbms. Place these files in the directory:
+   client.bat   (runs the sql client)
+   start.bat    (starts the Derby db server)
+   stop.bat     (shuts down the Derby db server)
+These batch files assume that JavaDB distribution is located at:
+C:\Program Files\Sun\JavaDB
+If not, replace with the correct path in each of the batch files.
+
+2. Checking the Installation: Run start.bat and then run client.bat.
+At the ij prompt, type
+    run 'sample.sql';
+(Don't forget the semicolon)
+If there are no errors, you will have created a SAMPLE table.
+
+3. Load data for the FPP Lab: 
+At the ij prompt type
+    run 'maindb_data.sql';
+You should see no errors in the command window. This
+creates PERSON and ADDRESS tables.
+
+4. Set up a test project in Eclipse.
+Create a package javadb and a class TestJavaDb
+Copy the derbyclient.jar in the lib folder of your JavaDb distribution to
+a convenient folder (call it 'jars') in C:\javadb_files.
+Then add derbyclient.jar as an External Jar to your new Java project.
+Copy the class TestJavaDb into your package.
+
+5. Look over the class and run it. This will work only if your JavaDb server
+is running.
+
+6. Run stop.bat to shut down the Derby server.
+
+

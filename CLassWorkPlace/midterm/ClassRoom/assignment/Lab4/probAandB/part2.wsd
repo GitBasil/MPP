@@ -1,0 +1,37 @@
+@startuml
+
+activate Actor
+    Actor -> CheckoutForm: checkoutBook()
+    activate CheckoutForm
+
+        CheckoutForm -> CheckoutController: checkoutBook(m_book, m_member)
+        activate CheckoutController
+
+            CheckoutController -> CheckoutRecord: new CheckoutRecord()
+            activate CheckoutRecord
+            deactivate CheckoutRecord
+
+            CheckoutController -> LibraryMember: getCheckoutPeriod()
+            activate LibraryMember
+                LibraryMember --> CheckoutController: checkoutPeriod
+            deactivate LibraryMember
+
+            activate CheckoutRecord
+                CheckoutController -> CheckoutRecord: setDueDate(checkoutPeriod)
+                CheckoutController -> CheckoutRecord: addBook(m_book)
+                CheckoutRecord --> CheckoutController: aCheckoutRecord
+            deactivate CheckoutRecord
+
+            CheckoutController -> LibraryMember: addCheckoutRecord(aCheckoutRecord)
+            activate LibraryMember
+            deactivate LibraryMember
+
+        deactivate CheckoutController
+
+        CheckoutForm -> CheckoutForm: displayCheckoutInfo()
+        CheckoutForm -> CheckoutForm: clearCheckoutFields()
+
+    deactivate CheckoutForm
+deactivate Actor
+
+@enduml

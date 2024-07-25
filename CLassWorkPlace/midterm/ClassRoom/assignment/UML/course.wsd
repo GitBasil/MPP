@@ -1,0 +1,11 @@
+@startuml
+
+class Course {
+    +id: String
+    +name: String
+    +description: String
+}
+
+Course "0..*" <-- "0..*" Course : prerequisiteFor
+
+@enduml

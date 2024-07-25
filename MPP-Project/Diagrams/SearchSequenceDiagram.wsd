@@ -1,0 +1,31 @@
+@startuml "SearchSequenceDiagram"
+
+title Search
+
+actor Librarian
+
+participant UI
+participant SystemController
+participant DataStore
+
+Librarian -> UI : 1. enter member ID
+activate UI
+
+    UI -> SystemController : 2. searchMemberByID(memberID)
+    activate SystemController
+
+        SystemController -> DataStore : 3. fetchCheckoutRecord(memberID)
+        activate DataStore
+            DataStore --> SystemController : 4. return(checkoutRecord)
+        deactivate DataStore
+
+        SystemController -> UI : 5. displayCheckoutRecord(checkoutRecord)
+
+        UI -> SystemController : 6. printCheckoutRecord(checkoutRecord)
+        SystemController -> SystemController : 7. print(record with aligned columns)
+        activate SystemController
+        deactivate SystemController
+    deactivate SystemController
+deactivate UI
+
+@enduml

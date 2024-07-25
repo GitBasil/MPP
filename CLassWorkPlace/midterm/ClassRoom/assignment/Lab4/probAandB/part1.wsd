@@ -1,0 +1,20 @@
+@startuml
+
+participant "anOrder" as Order
+participant "anOrderLine" as OrderLine
+participant "aProduct" as Product
+participant "aCustomer" as Customer
+
+activate Order
+    Order -> OrderLine: 1. calculatePrice()
+    activate OrderLine
+        OrderLine -> Product: 2. * getPrice(quantity: number)
+        activate Product
+        deactivate Product
+        OrderLine -> OrderLine: 3. getBaseValue()
+        OrderLine -> Customer: 4. getDiscountedValue(Order)
+        activate Customer
+        deactivate Customer
+    deactivate OrderLine
+deactivate Order
+@enduml

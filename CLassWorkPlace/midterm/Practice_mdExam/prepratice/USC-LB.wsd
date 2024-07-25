@@ -1,0 +1,24 @@
+@startuml
+
+actor User
+actor Admin
+actor Database
+
+rectangle "LB" {
+    usecase "Login" as A
+    usecase "Add New Member" as B
+    usecase "Add Book Copy" as C
+    usecase "Checkout Book" as D
+}
+
+User -> A
+Admin -> A
+A -> Database
+Admin -> B
+B -> Database
+Admin -> C
+C -> Database
+User -> D
+D -> Database
+
+@enduml

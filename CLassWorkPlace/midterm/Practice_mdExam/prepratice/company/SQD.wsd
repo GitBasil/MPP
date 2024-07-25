@@ -1,0 +1,24 @@
+@startuml
+
+actor User
+participant Company
+participant Department
+participant Position
+participant Employee
+
+User -> Company: 1. getSumOfAllSalaries()
+activate Company
+
+    Company -> Department: 2. * getDepartmentSalary()
+    activate Department
+        Department -> Position: 3. * getPositionSalary()
+        activate Position
+            Position -> Employee: 4. getSalary()
+            activate Employee
+            deactivate Employee
+        deactivate Position
+    deactivate Department
+
+deactivate Company
+
+@enduml

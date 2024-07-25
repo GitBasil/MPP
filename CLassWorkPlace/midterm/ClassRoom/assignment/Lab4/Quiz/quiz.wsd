@@ -1,0 +1,25 @@
+@startuml
+class Company {
+}
+
+class Department {
+    +name: String
+}
+
+class Office {
+    +location: String
+    +isHeadquarter: Boolean
+}
+
+class Employee {
+    +name: String
+    +employeeID: String
+}
+
+Company "1" -- "0..*" Department : has
+Department "1" -- "1" Employee : managed by
+Department "1" -- "0..*" Employee : consists of
+Department "0..*" -- "1..*" Office : located in
+Office "1" -- "0..*" Department : has
+
+@enduml

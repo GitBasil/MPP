@@ -1,0 +1,66 @@
+@startuml "Checkout"
+title Checkout Book
+
+actor Librarian
+
+participant UI
+participant SystemController
+participant LibraryMember
+participant Book
+participant BookCopy
+participant CheckoutEntry
+participant CheckoutRecord
+participant DataAccess
+
+
+Librarian -> UI: 1. checkout
+activate UI
+    UI -> UI: 2. handle
+    activate SystemController
+        UI -> SystemController: 3. checkoutBook(memberId, isbn)
+        SystemController -> DataAccess: 4. searchMember(memberId)
+        activate DataAccess
+        deactivate DataAccess
+
+        SystemController -> DataAccess: 5. searchBook(isbn)
+        activate DataAccess
+        deactivate DataAccess
+
+        SystemController -> Book: 6. isAvailable
+        activate Book
+        deactivate Book
+
+        SystemController  -> Book: 7. nextAvailableCopy
+        activate Book
+        deactivate Book
+
+        SystemController -> Book: 8. getMaxCheckoutLength
+        activate Book
+        deactivate Book
+
+        SystemController -> LibraryMember: 9. checkout(copy, todaysDate, todayPlusCheckoutLength)
+        activate LibraryMember
+            LibraryMember -> BookCopy: 10. isAvailable(false)
+            activate BookCopy
+            deactivate BookCopy
+            LibraryMember -> CheckoutEntry: 11. createEntry(copy, checkoutDate, dueDate)
+            activate CheckoutEntry
+            deactivate CheckoutEntry
+            LibraryMember -> CheckoutRecord: 12. addEntry(checkoutEntry)
+            activate CheckoutRecord
+            deactivate CheckoutRecord
+
+        deactivate LibraryMember
+        SystemController -> DataAccess: 13. saveMember(member)
+        activate DataAccess
+        deactivate DataAccess
+        SystemController -> DataAccess: 14. saveBook(book)
+        activate DataAccess
+        deactivate DataAccess
+
+        deactivate LibraryMember
+        SystemController -> UI: 15. displaySuccess
+    deactivate SystemController
+deactivate UI
+
+@enduml

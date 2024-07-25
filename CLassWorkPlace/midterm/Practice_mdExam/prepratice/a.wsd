@@ -1,0 +1,11 @@
+@startuml
+
+class LinkedList {
+}
+
+class ListItem {
+}
+
+LinkedList --* ListItem
+ListItem -- ListItem
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+
+title Company Structure
+
+class Company {
+  - name: String
+  - departments: List<Department>
+}
+
+class Department {
+  - name: String
+  - location: String
+  - positions: List<Position>
+}
+
+class Position {
+  - title: String
+  - description: String
+  - employee: Employee
+}
+
+class Employee {
+  - employeeId: String
+  - firstname: String
+  - middleInitial: String
+  - lastName: String
+  - birthDate: String
+  - SSN: String
+  - salary: double
+}
+
+Company "1" *-- "0..*" Department
+Department "1" *-- "0..*" Position
+Position "1" *-- "1" Employee
+
+@enduml

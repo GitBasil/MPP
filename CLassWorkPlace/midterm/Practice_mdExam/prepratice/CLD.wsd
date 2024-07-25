@@ -1,0 +1,20 @@
+@startuml
+
+class Student {
+  -SSN: string
+  -firstName: string
+  -lastName: string
+  +getFullName(): string
+}
+
+Class Grades {
+    -mark: number
+}
+
+Student ..> Grades: Dependecy
+Student -- Grades: Association bidirectional
+Student --> Grades: Association Unidirectional
+Student *--|> Grades: Inheritance
+Student *...|> Grades: Interface
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+
+Class Company{
+    -name: string
+}
+
+Class Department {
+    -name: string
+    -location: string
+}
+
+Class Position {
+    -title: string
+    -description: string
+}
+
+Class Employee {
+    -employeeId: int
+    -firstname: string
+    -middleInitial: string
+    -lastName: string
+    -birthDate: date
+    -SSN: string
+    -salary: double
+}
+
+Company "1" -- "0.*" Department : has
+Department "1" -- "*" Position : contains
+Position "1" -- "1" Employee : filled by
+
+
+@enduml

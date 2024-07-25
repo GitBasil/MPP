@@ -1,0 +1,32 @@
+@startuml "OverdueSequenceDiagram"
+
+title Overdue
+
+actor Librarian
+
+participant UI
+participant SystemController
+participant DataStore
+
+Librarian -> UI : search book by ISBN
+activate UI
+
+UI -> SystemController : searchBook(ISBN)
+    activate SystemController
+
+    SystemController -> DataStore : fetchBookCopies(ISBN)
+    activate DataStore
+        DataStore --> SystemController : return(bookCopies)
+    deactivate DataStore
+
+    SystemController -> DataStore : fetchCheckoutRecords(bookCopies)
+    activate DataStore
+        DataStore --> SystemController : return(checkoutRecords)
+    deactivate DataStore
+
+    SystemController -> UI : displayBookStatus(bookCopies, checkoutRecords)
+
+    deactivate SystemController
+deactivate UI
+
+@enduml

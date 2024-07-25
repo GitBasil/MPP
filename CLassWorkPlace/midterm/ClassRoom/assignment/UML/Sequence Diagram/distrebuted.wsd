@@ -1,0 +1,19 @@
+@startuml
+
+title Calculate Price Process
+
+participant anOrder
+participant anOrderLine
+participant aProduct
+participant aCustomer
+
+anOrder -> anOrder: calculatePrice
+anOrder -> anOrderLine: * calculatePrice
+anOrderLine -> aProduct: getPrice(quantity:int)
+aProduct -> anOrderLine: getPrice
+anOrder -> aCustomer: getDiscountedValue(anOrder)
+aCustomer -> anOrder: getBaseValue
+anOrder -> aCustomer: discountedValue
+
+
+@enduml

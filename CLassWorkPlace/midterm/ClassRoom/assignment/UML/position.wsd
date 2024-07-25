@@ -1,0 +1,11 @@
+@startuml
+
+class Position {
+    +id: String
+    +title: String
+    +isManagerial: Boolean
+}
+
+Position "1" -- "0..*" Position : reportsTo
+
+@enduml

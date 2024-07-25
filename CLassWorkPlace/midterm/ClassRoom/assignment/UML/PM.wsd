@@ -1,0 +1,36 @@
+@startuml
+
+class ProjectManager {
+    +name: String
+    +id: String
+}
+
+class Project {
+    -name: String
+    -id: String
+    -isCompleted: boolean
+    -featureSet: List<Feature>
+    -releases: List<Release>
+    +getName()
+}
+
+class Release {
+    +id: String
+    +releaseDate: Date
+    +features: List<Feature>
+}
+
+class Feature {
+    +name: String
+    +id: String
+    +estimatedTimeRemaining: Double
+    +developer: Developer
+}
+
+class Developer {
+    +name: String
+    +id: String
+}
+
+
+@enduml
